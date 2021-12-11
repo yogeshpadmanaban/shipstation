@@ -39,6 +39,7 @@ class Login extends Component {
                 if(response.success){
                     sessionStorage.setItem('userAccountId', response.obj._id)
                     sessionStorage.setItem('userName', response.obj.userName)
+                    console.log('roles', response.obj);
                     sessionStorage.setItem('role', response.obj.roles[0])
                     switch (sessionStorage.getItem('role')) {
                         case "A":
