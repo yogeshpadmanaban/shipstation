@@ -44,6 +44,9 @@ app.use("/api/v1/mockups/",mockupRoutes);
 const printFileRoutes = require('./routes/printFile');
 app.use("/api/v1/printfiles/",printFileRoutes);
 
+const listCarriers = require('./routes/shipstation/listCarriers');
+app.use("/api/v1/listcarriers/",listCarriers);
+
 const PORT = process.env.PORT || 8082;
 app.listen(PORT,() => {
     console.log(`Server is running on ${PORT}`);
