@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 var request = require('request');
-const ListPackages = require('../../models/shipstation/listPackages');
+const ListServices = require('../../models/shipstation/listServices');
 
 // exports.getAll = (req, res) => {
 //     // let auth = ("0858419d18ef4cec8b891099523d1d15" + ":" + "00ff87e6280e47f78a10dd7b273cbc44").toString("base64");
@@ -21,10 +21,10 @@ const ListPackages = require('../../models/shipstation/listPackages');
 //             if(data && data.length > 0) {
 //                 for(let i = 0; i < data.length; i++) {
 //                     let singleData = data[i];
-//                     ListPackages.findOne({}).sort({'_id':-1}).exec()
+//                     ListServices.findOne({}).sort({'_id':-1}).exec()
 //                     .then(doc => {
 //                         let id = doc ? doc._id + 1 : 1;
-//                         let listPackages = new ListPackages({
+//                         let listServices = new ListServices({
 //                             _id: id,
 //                             carrierCode: singleData.carrierCode,
 //                             code: singleData.code,
@@ -33,7 +33,7 @@ const ListPackages = require('../../models/shipstation/listPackages');
 //                             international: singleData.international,
 //                             dateCreated: Date.now(),
 //                         });
-//                         listPackages.save((err, data) => {
+//                         listServices.save((err, data) => {
 //                             if(err) {
 //                                 res.json({ 
 //                                     'code': 400,
@@ -59,7 +59,7 @@ const ListPackages = require('../../models/shipstation/listPackages');
 //                 }
 //             } else {
 //                 // Here return
-//                 ListPackages.find({}).exec().then(doc => {
+//                 ListServices.find({}).exec().then(doc => {
 //                     res.json({
 //                         'code' : 200,
 //                         'success': true,
@@ -84,7 +84,7 @@ const ListPackages = require('../../models/shipstation/listPackages');
 
 //     });
 
-//     // ListPackages.find({}).exec().then(doc => {
+//     // ListServices.find({}).exec().then(doc => {
 //     //     res.json({
 //     //         'code' : 200,
 //     //         'success': true,
@@ -108,7 +108,7 @@ exports.getAll = (req, res) => {
     // console.log("auth", auth);
     var options = {
         'method': 'GET',
-        'url': 'https://ssapi.shipstation.com/carriers/listpackages?carrierCode=stamps_com',
+        'url': 'https://ssapi.shipstation.com/carriers/listServices?carrierCode=stamps_com',
         'headers': {
             'Host': 'ssapi.shipstation.com',
             'Authorization': 'Basic MDg1ODQxOWQxOGVmNGNlYzhiODkxMDk5NTIzZDFkMTU6MDBmZjg3ZTYyODBlNDdmNzhhMTBkZDdiMjczY2JjNDQ='
@@ -119,7 +119,7 @@ exports.getAll = (req, res) => {
         if (response && response.body) {
             let data = JSON.parse(response.body);
             if (data && data.length > 0) {
-                ListPackages.insertMany(data, function (err, result) {
+                ListServices.insertMany(data, function (err, result) {
                     if (result) {
                         res.json({
                             'code': 200,
