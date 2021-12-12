@@ -58,13 +58,13 @@ const routes = [
     layout: "/admin",
     menu: "A"
   },
-  {
-    path: "/listcarriers",
-    name: "ListCarriers",
-    component: ListCarriers,
-    layout: "/admin",
-    menu: "A"
-  },
+  // {
+  //   path: "/listcarriers",
+  //   name: "ListCarriers",
+  //   component: ListCarriers,
+  //   layout: "/admin",
+  //   menu: "A"
+  // },
 
 
 
