@@ -12,6 +12,9 @@ import UserAccount from "./views/UserAccount";
 import ProductSettings from "./views/ProductSettings";
 import Product from "./views/Product";
 
+// shipstation
+import ListCarriers from "./views/ListCarriers";
+
 const routes = [
   {
     path: "/useraccounts",
@@ -56,6 +59,16 @@ const routes = [
     menu: "A"
   },
   {
+    path: "/listcarriers",
+    name: "ListCarriers",
+    component: ListCarriers,
+    layout: "/admin",
+    menu: "A"
+  },
+
+
+
+  {
     path: "/jobs",
     name: "Jobs",
     component: Job,
@@ -76,6 +89,10 @@ const routes = [
     layout: "/admin",
     menu: "W"
   },
+
+
+
+
   {
     path: "/submitdesigns",
     name: "Submit Designs",
@@ -97,6 +114,8 @@ const routes = [
     layout: "/admin",
     menu: "C"
   },
+
+
   {
     path: "/createuser",
     name: "Create User",
@@ -104,6 +123,8 @@ const routes = [
     layout: "/admin",
     menu: "X"
   }
+
+
 ];
 
 export default routes;
