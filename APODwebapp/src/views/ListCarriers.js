@@ -1,37 +1,22 @@
 import React, { Component } from 'react';
 import { Card, Container, Row, Table } from 'react-bootstrap';
+import axios from 'axios';
 
 class ListCarriers extends Component{
     constructor(props){
         super(props);
         this.state = {
-            fields: {designSubmissionId: '', userId: '', productId: '', imageDesc: '', file: null},
-            errors: {},
-            ListCarriers: [],
-            validated: false
+            ListCarriers: []
         }
     }
 
     componentDidMount(){
-        fetch(`http://localhost:8082/api/v1/listcarriers`, {
-                "method": "GET",
-                "headers": {
-                    "content-type": "application/json",
-                    "accept": "application/json"
-                }
-            })
-            .then(response => response.json())
-            .then(response => {
-                if(response.success){
-                    console.log("response", response);
-                    this.setState({ListCarriers: response.output});
-                }else{
-                    console.log(response);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        axios.post(`http://localhost:8082/api/v1/listcarriers`, '').then(res => {
+            if(res && res.data && res.data.success) {
+                this.setState({ListCarriers: res.data.output});
+                console.log("res", res.data.output);
+            }
+      })
     }
  
     render(){
@@ -39,26 +24,28 @@ class ListCarriers extends Component{
             <Container fluid>
                 <Card>
                     <Card.Body>
-                        <Card.Title>View My ProductSettings</Card.Title>
+                        <Card.Title>List Carriers</Card.Title>
                         <Row>
                             <Table striped hover size="sm">
                                 <thead>
                                     <tr>
-                                        <th><b>Id</b></th>
-                                        <th><b>Product Id</b></th>
-                                        <th><b>Price</b></th>
-                                        <th><b>Product Tags List</b></th>
-                                        <th><b>Product HTML</b></th>
+                                        <th><b>name</b></th>
+                                        <th><b>nickname</b></th>
+                                        <th><b>code</b></th>
+                                        <th><b>accountNumber</b></th>
+                                        <th><b>balance</b></th>
+                                        <th><b>shippingProviderId</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.productSettings.map((prop) => {
+                                    {this.state.ListCarriers.map((prop) => {
                                         return <tr>
-                                            <td>{prop["_id"]}</td>
-                                            <td>{prop["productId"]}</td>
-                                            <td>{prop["price"]}</td>
-                                            <td>{prop["productTagsList"]}</td>
-                                            <td>{prop["productHtml"]}</td>
+                                            <td>{prop["name"]}</td>
+                                            <td>{prop["nickname"]}</td>
+                                            <td>{prop["code"]}</td>
+                                            <td>{prop["accountNumber"]}</td>
+                                            <td>{prop["balance"]}</td>
+                                            <td>{prop["shippingProviderId"]}</td>
                                         </tr>
                                     })}
                                 </tbody>

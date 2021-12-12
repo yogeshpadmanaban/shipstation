@@ -3,7 +3,7 @@ const router = express.Router();
 
 const listCarriersController = require('../../controllers/shipstation/listCarriersController');
 
-router.get('/', listCarriersController.getAll);
-// router.post('/', listCarriersController.createNew);
+router.post('/', listCarriersController.createNew);
+// router.get('/', listCarriersController.getAll);
 
 module.exports = router;
