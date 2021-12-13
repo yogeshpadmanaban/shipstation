@@ -103,7 +103,7 @@ const ListPackages = require('../../models/shipstation/listPackages');
 // }
 
 
-exports.getAll = (req, res) => {
+exports.createNew = (req, res) => {
     // let auth = ("0858419d18ef4cec8b891099523d1d15" + ":" + "00ff87e6280e47f78a10dd7b273cbc44").toString("base64");
     // console.log("auth", auth);
     var options = {

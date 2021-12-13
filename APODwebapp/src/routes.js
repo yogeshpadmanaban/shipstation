@@ -14,6 +14,7 @@ import Product from "./views/Product";
 
 // shipstation
 import ListCarriers from "./views/ListCarriers";
+import ListPackages from "./views/ListPackages";
 
 const routes = [
   {
@@ -64,6 +65,13 @@ const routes = [
     path: "/listcarriers",
     name: "ListCarriers",
     component: ListCarriers,
+    layout: "/admin",
+    menu: "A"
+  },
+  {
+    path: "/listpackages",
+    name: "ListPackages",
+    component: ListPackages,
     layout: "/admin",
     menu: "A"
   },
