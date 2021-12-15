@@ -50,6 +50,9 @@ app.use("/api/v1/listcarriers/",listCarriers);
 const listPackages = require('./routes/shipstation/listPackages');
 app.use("/api/v1/carriers/listpackages/",listPackages);
 
+const listServices = require('./routes/shipstation/listServices');
+app.use("/api/v1/carriers/listservices/",listServices);
+
 const PORT = process.env.PORT || 8082;
 app.listen(PORT,() => {
     console.log(`Server is running on ${PORT}`);
