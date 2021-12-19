@@ -1,29 +1,62 @@
 import React, { Component } from 'react';
-import { Card, Container, Row, Table } from 'react-bootstrap';
+import { Card, Container, Form, Button, Row, Col, Table } from 'react-bootstrap';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
-class ListPackages extends Component{
-    constructor(props){
+class ListPackages extends Component {
+    constructor(props) {
         super(props);
         this.state = {
-            ListPackages: []
-        }
+            ListPackages: [],
+            fields: { carrierCode: '' }
+        };
+        this.handleOnChange = this.handleOnChange.bind(this);
+        this.handleOnSubmit = this.handleOnSubmit.bind(this);
     }
 
-    componentDidMount(){
-        axios.post(`http://localhost:8082/api/v1/carriers/listpackages?carrierCode=stamps_com`, '').then(res => {
-            if(res && res.data && res.data.success) {
-                this.setState({ListPackages: res.data.output});
-                console.log("res", res.data.output);
+    componentDidMount() {
+        axios.post(`http://localhost:8082/api/v1/carriers/listpackages`, { carrierCode: 'stamps_com	' }).then(res => {
+            console.log("sfsfsfsdfsdf", res);
+            if (res && res.data && res.data.success) {
+                this.setState({ ListPackages: res.data.output });
             }
-      })
+        })
     }
- 
-    render(){
-        return(
+
+    handleOnChange = (e) => {
+        let fields = this.state.fields;
+        fields[e.currentTarget.id] = e.currentTarget.files;
+        this.setState({ fields })
+    }
+
+    handleOnSubmit() {
+        axios.post(`http://localhost:8082/api/v1/carriers/listpackages`, { carrierCode: this.state.fields.carrierCode }).then(res => {
+            console.log("sfsfsfsdfsdf", res);
+            if (res && res.data && res.data.success) {
+                this.setState({ ListPackages: res.data.output });
+            }
+        })
+    }
+
+    render() {
+        return (
             <Container fluid>
                 <Card>
                     <Card.Body>
+                        <Form>
+                            <Col md={4}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>CarrierCode</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter carrierCode" id="carrierCode" name="carrierCode" value={this.state.fields.carrierCode} onChange={(e) => { this.handleOnChange(e) }} required />
+                                    <Form.Control.Feedback type="invalid">
+                                        Please enter a carrierCode.
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+
+                                <Button variant="primary" onClick={() => this.handleOnSubmit()}>submit</Button>
+                            </Col>
+                        </Form>
+
                         <Card.Title>List Packages</Card.Title>
                         <Row>
                             <Table striped hover size="sm">
@@ -42,12 +75,12 @@ class ListPackages extends Component{
                                             <td>{prop["carrierCode"]}</td>
                                             <td>{prop["code"]}</td>
                                             <td>{prop["name"]}</td>
-                                            <td>{prop["domestic"]}</td>
-                                            <td>{prop["international"]}</td>
+                                            <td>{prop["domestic"] ? 'Yes' : 'No'}</td>
+                                            <td>{prop["international"] ? 'Yes' : 'No'}</td>
                                         </tr>
                                     })}
                                 </tbody>
-                            </Table>      
+                            </Table>
                         </Row>
                     </Card.Body>
                 </Card>

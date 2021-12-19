@@ -44,8 +44,9 @@ app.use("/api/v1/mockups/",mockupRoutes);
 const printFileRoutes = require('./routes/printFile');
 app.use("/api/v1/printfiles/",printFileRoutes);
 
+// shipstation
 const listCarriers = require('./routes/shipstation/listCarriers');
-app.use("/api/v1/listcarriers/",listCarriers);
+app.use("/api/v1/carriers/listcarriers/",listCarriers);
 
 const listPackages = require('./routes/shipstation/listPackages');
 app.use("/api/v1/carriers/listpackages/",listPackages);

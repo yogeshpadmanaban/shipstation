@@ -11,7 +11,6 @@ const listCarriersSchema = new Schema({
     nickname: { type: String },
     shippingProviderId: {type: Number},
     primary: { type: Boolean },
-    
     dateCreated: { type: Date, default: Date.now() },
     dateModified: { type: Date, default: Date.now() }
 });

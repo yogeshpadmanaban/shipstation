@@ -14,7 +14,6 @@ class ListServices extends Component{
         axios.post(`http://localhost:8082/api/v1/carriers/listservices?carrierCode=stamps_com`, '').then(res => {
             if(res && res.data && res.data.success) {
                 this.setState({ListServices: res.data.output});
-                console.log("res", res.data.output);
             }
       })
     }

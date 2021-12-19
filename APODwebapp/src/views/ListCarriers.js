@@ -2,25 +2,25 @@ import React, { Component } from 'react';
 import { Card, Container, Row, Table } from 'react-bootstrap';
 import axios from 'axios';
 
-class ListCarriers extends Component{
-    constructor(props){
+class ListCarriers extends Component {
+    constructor(props) {
         super(props);
         this.state = {
             ListCarriers: []
         }
     }
 
-    componentDidMount(){
-        axios.post(`http://localhost:8082/api/v1/listcarriers`, '').then(res => {
-            if(res && res.data && res.data.success) {
-                this.setState({ListCarriers: res.data.output});
+    componentDidMount() {
+        axios.get(`http://localhost:8082/api/v1/carriers/listcarriers`, '').then(res => {
+            if (res && res.data && res.data.success) {
+                this.setState({ ListCarriers: res.data.output });
                 console.log("res", res.data.output);
             }
-      })
+        })
     }
- 
-    render(){
-        return(
+
+    render() {
+        return (
             <Container fluid>
                 <Card>
                     <Card.Body>
@@ -49,7 +49,7 @@ class ListCarriers extends Component{
                                         </tr>
                                     })}
                                 </tbody>
-                            </Table>      
+                            </Table>
                         </Row>
                     </Card.Body>
                 </Card>
