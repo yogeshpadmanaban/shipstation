@@ -13,6 +13,14 @@ import ProductSettings from "./views/ProductSettings";
 import Product from "./views/Product";
 
 // shipstation
+
+// Tags
+import ListTags from "./views/ListTags";
+
+// Users
+import ListUsers from "./views/ListUsers";
+
+// Carriers
 import ListCarriers from "./views/ListCarriers";
 import ListPackages from "./views/ListPackages";
 import ListServices from "./views/ListServices";
@@ -62,6 +70,18 @@ const routes = [
   },
 
   // shipstation
+
+
+  // Tags
+  {
+    path: "/listtags",
+    name: "ListTags",
+    component: ListTags,
+    layout: "/admin",
+    menu: "A"
+  },
+
+  // Carriers
   {
     path: "/listcarriers",
     name: "ListCarriers",
@@ -80,6 +100,16 @@ const routes = [
     path: "/listservices",
     name: "ListServices",
     component: ListServices,
+    layout: "/admin",
+    menu: "A"
+  },
+
+  // Users
+
+  {
+    path: "/listUsers",
+    name: "ListUsers",
+    component: ListUsers,
     layout: "/admin",
     menu: "A"
   },

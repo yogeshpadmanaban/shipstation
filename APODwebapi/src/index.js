@@ -45,6 +45,13 @@ const printFileRoutes = require('./routes/printFile');
 app.use("/api/v1/printfiles/",printFileRoutes);
 
 // shipstation
+
+// tags
+const listTags = require('./routes/shipstation/listTags');
+app.use("/api/v1/tags/listtags/", listTags);
+
+
+// Carriers
 const listCarriers = require('./routes/shipstation/listCarriers');
 app.use("/api/v1/carriers/listcarriers/",listCarriers);
 
@@ -53,6 +60,11 @@ app.use("/api/v1/carriers/listpackages/",listPackages);
 
 const listServices = require('./routes/shipstation/listServices');
 app.use("/api/v1/carriers/listservices/",listServices);
+
+
+// users
+const listUsers = require('./routes/shipstation/listUsers');
+app.use("/api/v1/users/listusers/",listUsers);
 
 const PORT = process.env.PORT || 8082;
 app.listen(PORT,() => {

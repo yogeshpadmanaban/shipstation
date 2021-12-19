@@ -11,7 +11,7 @@ class ListServices extends Component{
     }
 
     componentDidMount(){
-        axios.post(`http://localhost:8082/api/v1/carriers/listservices?carrierCode=stamps_com`, '').then(res => {
+        axios.post(`http://localhost:8082/api/v1/carriers/listservices?carrierCode=stamps_com`, { carrierCode: 'stamps_com	' }).then(res => {
             if(res && res.data && res.data.success) {
                 this.setState({ListServices: res.data.output});
             }
@@ -23,7 +23,7 @@ class ListServices extends Component{
             <Container fluid>
                 <Card>
                     <Card.Body>
-                        <Card.Title>List Packages</Card.Title>
+                        <Card.Title>List Services</Card.Title>
                         <Row>
                             <Table striped hover size="sm">
                                 <thead>
@@ -41,8 +41,8 @@ class ListServices extends Component{
                                             <td>{prop["carrierCode"]}</td>
                                             <td>{prop["code"]}</td>
                                             <td>{prop["name"]}</td>
-                                            <td>{prop["domestic"]}</td>
-                                            <td>{prop["international"]}</td>
+                                            <td>{prop["domestic"] ? 'Yes' : 'No'}</td>
+                                            <td>{prop["international"] ? 'Yes' : 'No'}</td>
                                         </tr>
                                     })}
                                 </tbody>
