@@ -21,6 +21,7 @@ import ListTags from "./views/ListTags";
 import ListUsers from "./views/ListUsers";
 
 // Carriers
+import AddFunds from "./views/AddFunds";
 import ListCarriers from "./views/ListCarriers";
 import ListPackages from "./views/ListPackages";
 import ListServices from "./views/ListServices";
@@ -82,6 +83,13 @@ const routes = [
   },
 
   // Carriers
+  {
+    path: "/addFunds",
+    name: "AddFunds",
+    component: AddFunds,
+    layout: "/admin",
+    menu: "A"
+  },
   {
     path: "/listcarriers",
     name: "ListCarriers",

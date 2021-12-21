@@ -14,14 +14,14 @@ class ListPackages extends Component {
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
     }
 
-    componentDidMount() {
-        axios.post(`http://localhost:8082/api/v1/carriers/listpackages`, { carrierCode: 'stamps_com	' }).then(res => {
-            console.log("sfsfsfsdfsdf", res);
-            if (res && res.data && res.data.success) {
-                this.setState({ ListPackages: res.data.output });
-            }
-        })
-    }
+    // componentDidMount() {
+    //     axios.post(`http://localhost:8082/api/v1/carriers/listpackages`, { carrierCode: 'ups_walleted	' }).then(res => {
+    //         console.log("sfsfsfsdfsdf", res);
+    //         if (res && res.data && res.data.success) {
+    //             this.setState({ ListPackages: res.data.output });
+    //         }
+    //     })
+    // }
 
     handleOnChange = (e) => {
         let fields = this.state.fields;
@@ -29,9 +29,11 @@ class ListPackages extends Component {
         this.setState({ fields })
     }
 
-    handleOnSubmit() {
-        axios.post(`http://localhost:8082/api/v1/carriers/listpackages`, { carrierCode: this.state.fields.carrierCode }).then(res => {
-            console.log("sfsfsfsdfsdf", res);
+    handleOnSubmit(event) {
+        console.log(event.target.carrierCode.value);
+        event.preventDefault()
+        axios.get(`http://localhost:8082/api/v1/carriers/listpackages`,{ params: { carrierCode: event.target.carrierCode.value } }).then(res => {
+            
             if (res && res.data && res.data.success) {
                 this.setState({ ListPackages: res.data.output });
             }
@@ -43,7 +45,7 @@ class ListPackages extends Component {
             <Container fluid>
                 <Card>
                     <Card.Body>
-                        <Form>
+                    <Form noValidate validated={this.state.validated} onSubmit={(e) => {this.handleOnSubmit(e)}}>
                             <Col md={4}>
                                 <Form.Group className="mb-3">
                                     <Form.Label>CarrierCode</Form.Label>
@@ -52,8 +54,7 @@ class ListPackages extends Component {
                                         Please enter a carrierCode.
                                     </Form.Control.Feedback>
                                 </Form.Group>
-
-                                <Button variant="primary" onClick={() => this.handleOnSubmit()}>submit</Button>
+                                <Button  type="submit" variant="primary">submit</Button>
                             </Col>
                         </Form>
 
