@@ -2,13 +2,16 @@ const mongoose = require('mongoose');
 var request = require('request');
 const ListPackages = require('../../models/shipstation/listPackages');
 
+exports.getByCarrierCode = (req, res) => {
+    console.log("yoesg");
+}
 
 exports.getAll = (req, res) => {
     console.log("ListPackages", req.body.carrierCode);
     let carrierCode = req.body.carrierCode;
     var options = {
         'method': 'GET',
-        'url': `https://ssapi.shipstation.com/carriers/listpackages?carrierCode=`+carrierCode,
+        'url': `https://ssapi.shipstation.com/carriers/listpackages?carrierCode=ups_walleted`,
         'headers': {
             'Host': 'ssapi.shipstation.com',
             'Authorization': 'Basic MDg1ODQxOWQxOGVmNGNlYzhiODkxMDk5NTIzZDFkMTU6MDBmZjg3ZTYyODBlNDdmNzhhMTBkZDdiMjczY2JjNDQ='
@@ -16,6 +19,7 @@ exports.getAll = (req, res) => {
     };
 
     request(options, async function (error, response) {
+        console.log(response);
         let dbData, shipData, count = 0;
 
         if (response && response.body) {
