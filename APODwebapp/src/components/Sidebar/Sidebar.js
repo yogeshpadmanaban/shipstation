@@ -1,19 +1,31 @@
 import React from "react";
 import { useLocation, NavLink } from "react-router-dom";
-import { Nav } from "react-bootstrap";
+import { Nav, NavDropdown } from "react-bootstrap";
 
 function Sidebar({ color, image, routes }) {
   const location = useLocation();
   const activeRoute = (routeName) => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
-  let filroutes = routes.filter((prop) => {
-    if(prop.menu === sessionStorage.getItem('role')){
-        return prop
-    } else {
-        return null
-    } 
+
+let filroutes = routes.filter((prop) => {
+  // console.log(prop);
+  if(prop.menu === sessionStorage.getItem('role') && prop.group != 'carrier'){
+      return prop
+  } else {
+      return null
+  } 
 })
+
+let carrierGroup = routes.filter((prop) => {
+  if(prop.menu === sessionStorage.getItem('role') && prop.group == 'carrier'){
+      return prop
+  } else {
+      return null
+  } 
+})
+console.log(carrierGroup);
+
   return (
     <div className="sidebar" data-image={image} data-color={color}>
       <div
@@ -26,6 +38,7 @@ function Sidebar({ color, image, routes }) {
         <div className="logo d-flex align-items-center justify-content-start">
             APOD
         </div>
+
         <Nav>
           {filroutes.map((prop, key) => {
             if (!prop.redirect)
@@ -45,11 +58,30 @@ function Sidebar({ color, image, routes }) {
                   >
                     <i className={prop.icon} />
                     <p>{prop.name}</p>
-                  </NavLink>
+                  </NavLink>               
                 </li>
               );
             return null;
           })}
+
+        <NavDropdown title="CARRIERS" id="navbarScrollingDropdown">
+          {carrierGroup.map((prop, key) => {
+            if (!prop.redirect)
+              return (
+                <li
+                  className={
+                    prop.upgrade
+                      ? "active active-pro"
+                      : activeRoute(prop.layout + prop.path)
+                  }
+                  key={key}
+                >
+                <NavDropdown.Item href={prop.layout + prop.path}>{prop.name}</NavDropdown.Item>
+                </li>
+              );
+            return null;
+          })}
+          </NavDropdown>
         </Nav>
       </div>
     </div>

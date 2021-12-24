@@ -32,42 +32,48 @@ const routes = [
     name: "Users",
     component: UserAccount,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: ""
   },
   {
     path: "/designsubmissions",
     name: "Submissions",
     component: DesignSubmissions,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: ""
   },
   {
     path: "/mockups",
     name: "Mockups",
     component: Mockup,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: ""
   },
   {
     path: "/products",
     name: "Products",
     component: Product,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: ""
   },
   {
     path: "/templates",
     name: "Templates",
     component: Template,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: ""
   },
   {
     path: "/materialinventories",
     name: "Inventory",
     component: Inventory,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: ""
   },
 
   // shipstation
@@ -76,50 +82,56 @@ const routes = [
   // Tags
   {
     path: "/listtags",
-    name: "ListTags",
+    name: "List Tags",
     component: ListTags,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: ""
   },
 
   // Carriers
   {
     path: "/addFunds",
-    name: "AddFunds",
+    name: "Add Funds",
     component: AddFunds,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: "carrier"
   },
   {
     path: "/listcarriers",
-    name: "ListCarriers",
+    name: "List Carriers",
     component: ListCarriers,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: "carrier"
   },
   {
     path: "/listpackages",
-    name: "ListPackages",
+    name: "List Packages",
     component: ListPackages,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: "carrier"
   },
   {
     path: "/listservices",
-    name: "ListServices",
+    name: "List Services",
     component: ListServices,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: "carrier"
   },
 
   // Users
 
   {
     path: "/listUsers",
-    name: "ListUsers",
+    name: "List Users",
     component: ListUsers,
     layout: "/admin",
-    menu: "A"
+    menu: "A",
+    group: ""
   },
 
 
@@ -129,21 +141,24 @@ const routes = [
     name: "Jobs",
     component: Job,
     layout: "/admin",
-    menu: "W"
+    menu: "W",
+    group: ""
   },
   {
     path: "/workstations",
     name: "Work stations",
     component: WorkStation,
     layout: "/admin",
-    menu: "W"
+    menu: "W",
+    group: ""
   },
   {
     path: "/printfiles",
     name: "Print files",
     component: PrintFile,
     layout: "/admin",
-    menu: "W"
+    menu: "W",
+    group: ""
   },
 
 
@@ -154,7 +169,8 @@ const routes = [
     name: "Submit Designs",
     component: SubmitDesigns,
     layout: "/admin",
-    menu: "C"
+    menu: "C",
+    group: ""
   },
   {
     path: "/exportlistings",
@@ -168,7 +184,8 @@ const routes = [
     name: "Product Settings",
     component: ProductSettings,
     layout: "/admin",
-    menu: "C"
+    menu: "C",
+    group: ""
   },
 
 
@@ -177,7 +194,8 @@ const routes = [
     name: "Create User",
     component: CreateUser,
     layout: "/admin",
-    menu: "X"
+    menu: "X",
+    group: ""
   }
 
 
