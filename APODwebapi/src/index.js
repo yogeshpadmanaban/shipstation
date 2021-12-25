@@ -64,6 +64,11 @@ app.use("/api/v1/carriers/listpackages/",listPackages);
 const listServices = require('./routes/shipstation/listServices');
 app.use("/api/v1/carriers/listservices/",listServices);
 
+// orders
+const listOrders = require('./routes/shipstation/listOrders');
+app.use("/api/v1/orders/listorders/",listOrders);
+
+
 
 
 

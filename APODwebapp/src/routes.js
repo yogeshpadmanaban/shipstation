@@ -21,10 +21,14 @@ import ListTags from "./views/ListTags";
 import ListUsers from "./views/ListUsers";
 
 // Carriers
+
 // import AddFunds from "./views/AddFunds";
 import ListCarriers from "./views/ListCarriers";
 import ListPackages from "./views/ListPackages";
 import ListServices from "./views/ListServices";
+
+// Orders
+import ListOrders from "./views/ListOrders";
 
 const routes = [
   {
@@ -89,6 +93,7 @@ const routes = [
     group: ""
   },
 
+   // Users
   {
     path: "/listUsers",
     name: "List Users",
@@ -133,8 +138,17 @@ const routes = [
     group: "carrier"
   },
 
-  // Users
+ 
+   // getOrder
 
+   {
+    path: "/order",
+    name: "List Order",
+    component: ListOrders,
+    layout: "/admin",
+    menu: "A",
+    group: ""
+  },
 
 
   {
