@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 var request = require('request');
+var authKey = require('./Authkey.js');
 const ListServices = require('../../models/shipstation/listServices');
 
 exports.getAll = (req, res) => {
-    console.log("ListServices", req.body.carrierCode);
-    let carrierCode = req.body.carrierCode;
+    console.log("ListServices", req.params.carrierCode, authKey);
+    let carrierCode = req.params.carrierCode;
     var options = {
         'method': 'GET',
         'url': `https://ssapi.shipstation.com/carriers/listservices?carrierCode=`+carrierCode,
         'headers': {
             'Host': 'ssapi.shipstation.com',
-            'Authorization': 'Basic MDg1ODQxOWQxOGVmNGNlYzhiODkxMDk5NTIzZDFkMTU6MDBmZjg3ZTYyODBlNDdmNzhhMTBkZDdiMjczY2JjNDQ='
+            'Authorization': authKey
         }
     };
 
@@ -24,7 +25,7 @@ exports.getAll = (req, res) => {
                 if (!dbData || dbData.length == 0) {
                     ListServices.insertMany(shipData, function (err, result) {
                         if (result) {
-                            ListServices.find({}).exec()
+                            ListServices.find({carrierCode: carrierCode}).exec()
                             .then(doc => {
                                 res.json({
                                     'code': 200,
@@ -63,7 +64,8 @@ exports.getAll = (req, res) => {
                         }
                     });
                     if (count == shipData.length) {
-                        ListServices.find({}).exec()
+                        setTimeout(() => {
+                            ListServices.find({carrierCode: carrierCode }).exec()
                             .then(doc => {
                                 res.json({
                                     'code': 200,
@@ -78,6 +80,8 @@ exports.getAll = (req, res) => {
                                     'error': err
                                 });
                             })
+                        }, 2000);
+                       
                     }
                 }
             }

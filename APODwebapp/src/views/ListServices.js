@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Container, Form, Button, Row, Col, Table } from 'react-bootstrap';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
 class ListServices extends Component{
@@ -13,14 +14,6 @@ class ListServices extends Component{
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
     }
 
-    // componentDidMount(){
-    //     axios.post(`http://localhost:8082/api/v1/carriers/listservices?carrierCode=stamps_com`, { carrierCode: 'stamps_com' }).then(res => {
-    //         if(res && res.data && res.data.success) {
-    //             this.setState({ListServices: res.data.output});
-    //         }
-    //   })
-    // }
-
     handleOnChange = (e) => {
         let fields = this.state.fields;
         fields[e.currentTarget.id] = e.currentTarget.files;
@@ -28,14 +21,18 @@ class ListServices extends Component{
     }
 
     handleOnSubmit(event) {
-        console.log(event.target.carrierCode.value);
-        event.preventDefault()
-        axios.post(`http://localhost:8082/api/v1/carriers/listservices`,{ params: { carrierCode: event.target.carrierCode.value } }).then(res => {
-            if (res && res.data && res.data.success) {
-                this.setState({ ListServices: res.data.output });
-            }
-        })
+        event.preventDefault();
+        if(event.target.carrierCode.value) {
+            axios.get(`http://localhost:8082/api/v1/carriers/listservices/${event.target.carrierCode.value}`).then(res => {
+                if (res && res.data && res.data.success) {
+                    this.setState({ ListServices: res.data.output });
+                }
+            })
+        } else {
+            alert("Please fill requried fields");
+        }
     }
+
  
     render(){
         return(
@@ -45,7 +42,7 @@ class ListServices extends Component{
                     <Form noValidate validated={this.state.validated} onSubmit={(e) => {this.handleOnSubmit(e)}}>
                             <Col md={4}>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>CarrierCode</Form.Label>
+                                    <Form.Label>CarrierCode *</Form.Label>
                                     <Form.Control type="text" placeholder="Enter carrierCode" id="carrierCode" name="carrierCode" value={this.state.fields.carrierCode} onChange={(e) => { this.handleOnChange(e) }} required />
                                     <Form.Control.Feedback type="invalid">
                                         Please enter a carrierCode.
@@ -67,7 +64,7 @@ class ListServices extends Component{
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.ListServices.map((prop) => {
+                                    {this.state.ListServices && this.state.ListServices.length > 0 && this.state.ListServices.map((prop) => {
                                         return <tr>
                                             <td>{prop["carrierCode"]}</td>
                                             <td>{prop["code"]}</td>
@@ -76,6 +73,10 @@ class ListServices extends Component{
                                             <td>{prop["international"] ? 'Yes' : 'No'}</td>
                                         </tr>
                                     })}
+                                    {
+                                        this.state.ListServices && this.state.ListServices.length == 0 &&
+                                        <div className='text-center'> No Record found </div>
+                                    }
                                 </tbody>
                             </Table>      
                         </Row>
@@ -86,4 +87,4 @@ class ListServices extends Component{
     }
 }
 
-export default ListServices;
+export default withRouter(ListServices);

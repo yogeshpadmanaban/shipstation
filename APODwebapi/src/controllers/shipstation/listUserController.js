@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
 var request = require('request');
+var authKey = require('./Authkey.js');
 const ListUsers = require('../../models/shipstation/listUser');
 
 exports.getAll = (req, res) => {
+    console.log("List Users", authKey);
     var options = {
         'method': 'GET',
         'url': `https://ssapi.shipstation.com/users?showInactive=false`,
         'headers': {
             'Host': 'ssapi.shipstation.com',
-            'Authorization': 'Basic MDg1ODQxOWQxOGVmNGNlYzhiODkxMDk5NTIzZDFkMTU6MDBmZjg3ZTYyODBlNDdmNzhhMTBkZDdiMjczY2JjNDQ='
+            'Authorization': authKey
         }
     };
 
@@ -51,8 +53,8 @@ exports.getAll = (req, res) => {
                     await shipData.forEach(async (shipdata, index) => {
                         count = count + 1;
                         if (shipdata) {
-                            let code = shipdata.code;
-                            await ListUsers.find({ code: code }).exec()
+                            let userId = shipdata.userId;
+                            await ListUsers.find({ userId: userId }).exec()
                                 .then(doc => {
                                     if (doc && doc.length == 0) {
                                         ListUsers.insertMany(shipdata);

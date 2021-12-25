@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 var request = require('request');
+var authKey = require('./Authkey.js');
 const ListTags = require('../../models/shipstation/listTags');
 
 exports.getAll = (req, res) => {
-    console.log("List Tags");
+    console.log("List Tags", authKey);
     var options = {
         'method': 'GET',
         'url': 'https://ssapi.shipstation.com/accounts/listtags',
         'headers': {
             'Host': 'ssapi.shipstation.com',
-            'Authorization': 'Basic MDg1ODQxOWQxOGVmNGNlYzhiODkxMDk5NTIzZDFkMTU6MDBmZjg3ZTYyODBlNDdmNzhhMTBkZDdiMjczY2JjNDQ='
+            'Authorization': authKey
         }
     };
 
@@ -51,8 +52,8 @@ exports.getAll = (req, res) => {
                     await shipData.forEach(async (shipdata, index) => {
                         count = count + 1;
                         if (shipdata) {
-                            let code = shipdata.code;
-                            await ListTags.find({ code: code }).exec()
+                            let tagId = shipdata.tagId;
+                            await ListTags.find({ tagId: tagId }).exec()
                                 .then(doc => {
                                     if (doc && doc.length == 0) {
                                         ListTags.insertMany(shipdata);

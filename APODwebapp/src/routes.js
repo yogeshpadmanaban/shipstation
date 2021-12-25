@@ -21,7 +21,7 @@ import ListTags from "./views/ListTags";
 import ListUsers from "./views/ListUsers";
 
 // Carriers
-import AddFunds from "./views/AddFunds";
+// import AddFunds from "./views/AddFunds";
 import ListCarriers from "./views/ListCarriers";
 import ListPackages from "./views/ListPackages";
 import ListServices from "./views/ListServices";
@@ -89,15 +89,25 @@ const routes = [
     group: ""
   },
 
-  // Carriers
   {
-    path: "/addFunds",
-    name: "Add Funds",
-    component: AddFunds,
+    path: "/listUsers",
+    name: "List Users",
+    component: ListUsers,
     layout: "/admin",
     menu: "A",
-    group: "carrier"
+    group: ""
   },
+
+  // Carriers
+
+  // {
+  //   path: "/addFunds",
+  //   name: "Add Funds",
+  //   component: AddFunds,
+  //   layout: "/admin",
+  //   menu: "A",
+  //   group: "carrier"
+  // },
   {
     path: "/listcarriers",
     name: "List Carriers",
@@ -124,15 +134,6 @@ const routes = [
   },
 
   // Users
-
-  {
-    path: "/listUsers",
-    name: "List Users",
-    component: ListUsers,
-    layout: "/admin",
-    menu: "A",
-    group: ""
-  },
 
 
 

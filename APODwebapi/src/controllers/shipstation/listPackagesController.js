@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 var request = require('request');
+var authKey = require('./Authkey.js');
 const ListPackages = require('../../models/shipstation/listPackages');
 
 exports.getByCarrierCode = (req, res) => {
@@ -7,14 +8,14 @@ exports.getByCarrierCode = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    console.log("ListPackages", req.body.carrierCode);
+    console.log("ListPackages", req.body.carrierCode, authKey);
     let carrierCode = req.body.carrierCode;
     var options = {
         'method': 'GET',
         'url': `https://ssapi.shipstation.com/carriers/listpackages?carrierCode=ups_walleted`,
         'headers': {
             'Host': 'ssapi.shipstation.com',
-            'Authorization': 'Basic MDg1ODQxOWQxOGVmNGNlYzhiODkxMDk5NTIzZDFkMTU6MDBmZjg3ZTYyODBlNDdmNzhhMTBkZDdiMjczY2JjNDQ='
+            'Authorization': authKey
         }
     };
 

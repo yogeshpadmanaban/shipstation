@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Container, Form, Button, Row, Col, Table } from 'react-bootstrap';
+import { Card, Container, Form, Button, Col } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
-import axios from 'axios';
 
 class AddFunds extends Component {
     constructor(props){
