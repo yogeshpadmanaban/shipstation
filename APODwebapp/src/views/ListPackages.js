@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Container, Form, Button, Row, Col, Table } from 'react-bootstrap';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 
 class ListPackages extends Component {
@@ -13,15 +14,6 @@ class ListPackages extends Component {
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
     }
 
-    // componentDidMount() {
-    //     axios.post(`http://localhost:8082/api/v1/carriers/listpackages`, { carrierCode: 'ups_walleted	' }).then(res => {
-    //         console.log("sfsfsfsdfsdf", res);
-    //         if (res && res.data && res.data.success) {
-    //             this.setState({ ListPackages: res.data.output });
-    //         }
-    //     })
-    // }
-
     handleOnChange = (e) => {
         let fields = this.state.fields;
         fields[e.currentTarget.id] = e.currentTarget.files;
@@ -29,14 +21,17 @@ class ListPackages extends Component {
     }
 
     handleOnSubmit(event) {
-        console.log(event.target.carrierCode.value);
-        event.preventDefault()
-        axios.get(`http://localhost:8082/api/v1/carriers/listpackages`,{ params: { carrierCode: event.target.carrierCode.value } }).then(res => {
-            
-            if (res && res.data && res.data.success) {
-                this.setState({ ListPackages: res.data.output });
-            }
-        })
+        event.preventDefault();
+        if(event.target.carrierCode.value) {
+            axios.get(`http://localhost:8082/api/v1/carriers/listpackages/${event.target.carrierCode.value}`).then(res => {
+                if (res && res.data && res.data.success) {
+                    this.setState({ ListPackages: res.data.output });
+                }
+            })
+        }
+        else {
+            alert("Please fill requried fields");
+        }
     }
 
     render() {
@@ -70,7 +65,7 @@ class ListPackages extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.ListPackages.map((prop) => {
+                                {this.state.ListPackages && this.state.ListPackages.length > 0 && this.state.ListPackages.map((prop) => {
                                         return <tr>
                                             <td>{prop["carrierCode"]}</td>
                                             <td>{prop["code"]}</td>
@@ -79,6 +74,10 @@ class ListPackages extends Component {
                                             <td>{prop["international"] ? 'Yes' : 'No'}</td>
                                         </tr>
                                     })}
+                                    {
+                                        this.state.ListPackages && this.state.ListPackages.length == 0 &&
+                                        <div className='text-center'> No Record found </div>
+                                    }
                                 </tbody>
                             </Table>
                         </Row>

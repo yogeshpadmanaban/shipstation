@@ -9,7 +9,6 @@ function Sidebar({ color, image, routes }) {
   };
 
 let filroutes = routes.filter((prop) => {
-  // console.log(prop);
   if(prop.menu === sessionStorage.getItem('role') && prop.group != 'carrier'){
       return prop
   } else {
@@ -24,7 +23,6 @@ let carrierGroup = routes.filter((prop) => {
       return null
   } 
 })
-console.log(carrierGroup);
 
   return (
     <div className="sidebar" data-image={image} data-color={color}>

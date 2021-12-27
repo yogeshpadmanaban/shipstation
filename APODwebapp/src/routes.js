@@ -30,6 +30,9 @@ import ListServices from "./views/ListServices";
 // Orders
 import ListOrders from "./views/ListOrders";
 
+//fulfillments
+// import ListFulfillments from "./views/ListFulfillments";
+
 const routes = [
   {
     path: "/useraccounts",
@@ -137,10 +140,7 @@ const routes = [
     menu: "A",
     group: "carrier"
   },
-
- 
    // getOrder
-
    {
     path: "/order",
     name: "List Order",
@@ -149,8 +149,15 @@ const routes = [
     menu: "A",
     group: ""
   },
-
-
+  // fullfillments  
+  // {
+  //   path: "/listfulfillments",
+  //   name: "List Fulfillments",
+  //   component: ListFulfillments,
+  //   layout: "/admin",
+  //   menu: "A",
+  //   group: ""
+  // },
   {
     path: "/jobs",
     name: "Jobs",
@@ -175,10 +182,6 @@ const routes = [
     menu: "W",
     group: ""
   },
-
-
-
-
   {
     path: "/submitdesigns",
     name: "Submit Designs",
@@ -202,8 +205,6 @@ const routes = [
     menu: "C",
     group: ""
   },
-
-
   {
     path: "/createuser",
     name: "Create User",

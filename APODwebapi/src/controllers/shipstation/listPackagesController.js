@@ -3,16 +3,12 @@ var request = require('request');
 var authKey = require('./Authkey.js');
 const ListPackages = require('../../models/shipstation/listPackages');
 
-exports.getByCarrierCode = (req, res) => {
-    console.log("yoesg");
-}
-
 exports.getAll = (req, res) => {
-    console.log("ListPackages", req.body.carrierCode, authKey);
-    let carrierCode = req.body.carrierCode;
+    // console.log("ListPackages", req.params.carrierCode, authKey);
+    let carrierCode = req.params.carrierCode;
     var options = {
         'method': 'GET',
-        'url': `https://ssapi.shipstation.com/carriers/listpackages?carrierCode=ups_walleted`,
+        'url': `https://ssapi.shipstation.com/carriers/listpackages?carrierCode=`+carrierCode,
         'headers': {
             'Host': 'ssapi.shipstation.com',
             'Authorization': authKey
@@ -20,7 +16,7 @@ exports.getAll = (req, res) => {
     };
 
     request(options, async function (error, response) {
-        console.log(response);
+        // console.log(response);
         let dbData, shipData, count = 0;
 
         if (response && response.body) {
@@ -30,7 +26,7 @@ exports.getAll = (req, res) => {
                 if (!dbData || dbData.length == 0) {
                     ListPackages.insertMany(shipData, function (err, result) {
                         if (result) {
-                            ListPackages.find({}).exec()
+                            ListPackages.find({carrierCode: carrierCode}).exec()
                                 .then(doc => {
                                     res.json({
                                         'code': 200,
@@ -69,7 +65,8 @@ exports.getAll = (req, res) => {
                         }
                     });
                     if (count == shipData.length) {
-                        ListPackages.find({}).exec()
+                        setTimeout(() => {
+                            ListPackages.find({carrierCode: carrierCode }).exec()
                             .then(doc => {
                                 res.json({
                                     'code': 200,
@@ -84,6 +81,8 @@ exports.getAll = (req, res) => {
                                     'error': err
                                 });
                             })
+                        }, 2000);
+                       
                     }
                 }
             }

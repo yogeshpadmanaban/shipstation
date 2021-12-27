@@ -28,7 +28,8 @@ class ListServices extends Component{
                     this.setState({ ListServices: res.data.output });
                 }
             })
-        } else {
+        }
+        else {
             alert("Please fill requried fields");
         }
     }

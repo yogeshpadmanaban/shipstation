@@ -9,7 +9,7 @@ function Admin() {
   const mainPanel = React.useRef(null);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-        console.log(prop);
+        // console.log(prop);
       if (prop.layout === "/admin") {
         return (
           <Route

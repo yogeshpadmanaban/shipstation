@@ -4,7 +4,7 @@ var authKey = require('./Authkey.js');
 const ListServices = require('../../models/shipstation/listServices');
 
 exports.getAll = (req, res) => {
-    console.log("ListServices", req.params.carrierCode, authKey);
+    // console.log("ListServices", req.params.carrierCode, authKey);
     let carrierCode = req.params.carrierCode;
     var options = {
         'method': 'GET',
