@@ -30,6 +30,8 @@ import ListServices from "./views/ListServices";
 // Orders
 import ListOrders from "./views/ListOrders";
 import ListOrderItems from "./views/ListOrderItems";
+import ListActiveOrders from "./views/ListActiveOrders";
+import ListClosedOrders from "./views/ListClosedOrders";
 
 //fulfillments
 // import ListFulfillments from "./views/ListFulfillments";
@@ -144,8 +146,24 @@ const routes = [
    // getOrder
    {
     path: "/order",
-    name: "List Order",
+    name: "List All Order",
     component: ListOrders,
+    layout: "/admin",
+    menu: "A",
+    group: ""
+  },
+  {
+    path: "/activeorders",
+    name: "List Active Orders",
+    component: ListActiveOrders,
+    layout: "/admin",
+    menu: "A",
+    group: ""
+  },
+  {
+    path: "/closedorders",
+    name: "List Closed Orders",
+    component: ListClosedOrders,
     layout: "/admin",
     menu: "A",
     group: ""
