@@ -5,5 +5,6 @@ const listOrdersController = require('../../controllers/shipstation/listOrdersCo
 
 router.post('/', listOrdersController.createNew);
 router.get('/', listOrdersController.getAll);
+router.get('/:orderId', listOrdersController.getOrderItems);
 
 module.exports = router;

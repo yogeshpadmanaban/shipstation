@@ -68,10 +68,6 @@ app.use("/api/v1/carriers/listservices/",listServices);
 const listOrders = require('./routes/shipstation/listOrders');
 app.use("/api/v1/orders/listorders/",listOrders);
 
-
-
-
-
 const PORT = process.env.PORT || 8082;
 app.listen(PORT,() => {
     console.log(`Server is running on ${PORT}`);

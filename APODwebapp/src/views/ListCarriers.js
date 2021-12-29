@@ -38,7 +38,7 @@ class ListCarriers extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.ListCarriers.map((prop) => {
+                                    {this.state.ListCarriers && this.state.ListCarriers.length > 0 && this.state.ListCarriers.map((prop) => {
                                         return <tr>
                                             <td>{prop["name"]}</td>
                                             <td>{prop["nickname"]}</td>

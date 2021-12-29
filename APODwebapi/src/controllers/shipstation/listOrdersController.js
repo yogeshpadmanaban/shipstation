@@ -21,6 +21,26 @@ exports.getAll = (req, res) => {
         })
 }
 
+exports.getOrderItems = (req, res) => {
+    let orderId = req.params.orderId;
+    console.log("OrderID",orderId);
+    ListOrders.find({orderId:orderId}).exec()
+        .then(doc => {
+            res.json({
+                'code': 200,
+                'success': true,
+                'output': doc
+            });
+        })
+        .catch(err => {
+            res.json({
+                'code': 500,
+                'success': false,
+                'error': err
+            });
+        })
+}
+
 // CRON
 exports.createNew = (req, res) => {
     console.log("List Orders");

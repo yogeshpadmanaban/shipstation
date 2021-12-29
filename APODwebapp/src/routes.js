@@ -29,6 +29,7 @@ import ListServices from "./views/ListServices";
 
 // Orders
 import ListOrders from "./views/ListOrders";
+import ListOrderItems from "./views/ListOrderItems";
 
 //fulfillments
 // import ListFulfillments from "./views/ListFulfillments";
@@ -145,6 +146,15 @@ const routes = [
     path: "/order",
     name: "List Order",
     component: ListOrders,
+    layout: "/admin",
+    menu: "A",
+    group: ""
+  },
+
+  {
+    path: "/orderitems",
+    name: "List Order Items",
+    component: ListOrderItems,
     layout: "/admin",
     menu: "A",
     group: ""

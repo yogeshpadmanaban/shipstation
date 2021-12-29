@@ -29,31 +29,33 @@ class ListOrders extends Component {
                             <Table striped hover size="sm">
                                 <thead>
                                     <tr>
+                                        <th><b>Order Id</b></th>
                                         <th><b>Customer OrderNumber</b></th>
-                                        <th><b>APOD OrderNumber</b></th>
+                                        {/* <th><b>APOD OrderNumber</b></th> */}
                                         <th><b>Overall Status</b></th>
                                         <th><b>Age of the order</b></th>
-                                        <th><b>Item Sku</b></th>
+                                        {/* <th><b>Item Sku</b></th>
                                         <th><b>Item Name</b></th>
                                         <th><b>Item Qty</b></th>
 
                                         <th><b>Size</b></th>
-                                        <th><b>APOD Product</b></th>
+                                        <th><b>APOD Product</b></th> */}
                                         <th><b>Order Qty</b></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.state.ListOrders.map((prop) => {
                                         return <tr>
+                                            <td>{prop["orderId"]}</td>
                                             <td>{prop["orderNumber"]}</td>
-                                            <td>Items lineItemKey</td>
+                                            {/* <td>Items lineItemKey</td> */}
                                             <td>{prop["orderStatus"]}</td>
                                             <td>{prop["orderDate"]}</td>
-                                            <td>Items Sku</td>
+                                            {/* <td>Items Sku</td>
                                             <td>Items Name</td>
                                             <td>Items Qty</td>
                                             <td>Size</td>
-                                            <td></td>
+                                            <td></td> */}
                                             <td>{prop["items"].length}</td>
                                         </tr>
                                     })}
