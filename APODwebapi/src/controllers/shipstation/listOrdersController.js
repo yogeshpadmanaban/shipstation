@@ -41,6 +41,44 @@ exports.getOrderItems = (req, res) => {
         })
 }
 
+exports.getOrderByClosedstatus = (req, res) => {
+    ListOrders.find({ $or: [ { orderStatus: "shipped" },{ orderStatus: "cancelled" },{ orderStatus: "closed" } ] }).exec() 
+        .then(doc => {
+            res.json({
+                'code': 200,
+                'success': true,
+                'output': doc
+            });
+        })
+        .catch(err => {
+            res.json({
+                'code': 500,
+                'success': false,
+                'error': err
+            });
+        })
+}
+
+exports.getOrderByActivestatus = (req, res) => {
+    
+    ListOrders.find({ orderStatus: { $nin: [ "shipped","cancelled","closed"] } }).exec() 
+    // ListOrders.find({ $or: [ { orderStatus: "shipped" },{ orderStatus: "cancelled" },{ orderStatus: "closed" } ] }).exec() 
+        .then(doc => {
+            res.json({
+                'code': 200,
+                'success': true,
+                'output': doc
+            });
+        })
+        .catch(err => {
+            res.json({
+                'code': 500,
+                'success': false,
+                'error': err
+            });
+        })
+}
+
 // CRON
 exports.createNew = (req, res) => {
     console.log("List Orders");
